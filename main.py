@@ -5,6 +5,9 @@ import os
 import itertools
 from collections import defaultdict
 
+def log(msg):
+	print >>sys.stderr, msg
+
 def ParseCsv(line):
   result = []
   i = 0
@@ -43,7 +46,9 @@ for f in os.listdir(search_path):
   if not f.endswith('.csv'):
     continue
 
-  with open(os.path.join(search_path, f)) as csv:
+  filename = os.path.join(search_path, f)
+  with open(filename) as csv:
+    log('Start processing {}'.format(filename))
     parser = DateFinder()
 
     first = True
